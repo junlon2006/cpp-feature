@@ -11,7 +11,9 @@ static std::vector<std::shared_ptr<std::thread>> g_thread_list;
 static void __sync_print(int idx) {
     static int32_t count = 0;
     static std::mutex lock;
+    auto pid = std::this_thread::get_id();
     std::lock_guard<std::mutex> locker(lock);
+    cout<<"pid="<<pid;
     cout<<"["<<idx<<"]"<<" count="<<++count<<endl;
 }
 
