@@ -30,6 +30,24 @@ private:
     int m_data;
 };
 
+
+/* 循环引用，陷阱 */
+struct A;
+struct B;
+struct A {
+    std::shared_ptr<B> ptr;
+    ~A() {
+        cout<<"~A"<<endl; 
+    }
+};
+
+struct B {
+    std::shared_ptr<A> ptr; //改成std::weak_ptr<A> ptr;
+    ~B() {
+        cout<<"~B"<<endl;
+    }
+};
+
 int main() {
     cout<<"--------------------------------------"<<endl;
     /* 构造函数赋值 */
@@ -59,6 +77,12 @@ int main() {
     SmartPointer *sp = new SmartPointer(5);
     std::shared_ptr<SmartPointer> smartPointer5(sp);
     std::shared_ptr<SmartPointer> smartPointer6(sp);
+
+    /* 循环引用，引用计数为1，不是释放内存，内存泄漏。需要把A或B中的一个shared_ptr换成weak_ptr */
+    std::shared_ptr<A> pa(new A());
+    std::shared_ptr<B> pb(new B());
+    pa->ptr = pb;
+    pb->ptr = pa;
 
     return 0;
 }
