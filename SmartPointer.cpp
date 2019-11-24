@@ -30,7 +30,6 @@ private:
     int m_data;
 };
 
-
 /* 循环引用，陷阱 */
 struct A;
 struct B;
