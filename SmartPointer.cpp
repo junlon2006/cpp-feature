@@ -54,5 +54,11 @@ int main() {
     cout<<"--------------------------------------"<<endl;
     /* 返回this，析构二次，陷阱 */
     std::shared_ptr<SmartPointer> smartPointer4 = smartPointer3->getThisByNewSharedPtr();
+
+    /* 同一个指针初始化给两个智能指针，析构两次，陷阱 */
+    SmartPointer *sp = new SmartPointer(5);
+    std::shared_ptr<SmartPointer> smartPointer5(sp);
+    std::shared_ptr<SmartPointer> smartPointer6(sp);
+
     return 0;
 }
