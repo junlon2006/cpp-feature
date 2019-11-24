@@ -5,3 +5,4 @@
 4、c++11 Thread、shared_ptr、lock_guard(RAII)：Thread.cpp  
 5、c++11 recursive_mutex：RecursiveMutex.cpp  
 6、c++11 condition_variable：ConditionVariable.cpp  
+7、c++11 condition_variable：SimpleSyncQueue.cpp  
