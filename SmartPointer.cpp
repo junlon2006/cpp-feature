@@ -52,6 +52,7 @@ int main() {
     cout<<smartPointer3->shared_from_this()<<endl;
 
     cout<<"--------------------------------------"<<endl;
+    /* 返回this，析构二次，陷阱 */
     std::shared_ptr<SmartPointer> smartPointer4 = smartPointer3->getThisByNewSharedPtr();
     return 0;
 }
