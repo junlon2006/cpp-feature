@@ -21,6 +21,11 @@ public:
         return shared_from_this();
     }
 
+    /* 不要这么做，会析构二次，陷阱 */
+    std::shared_ptr<SmartPointer> getThisByNewSharedPtr() {
+        return std::shared_ptr<SmartPointer>(this);
+    }
+
 private:
     int m_data;
 };
@@ -46,5 +51,7 @@ int main() {
     cout<<smartPointer3->getMySelfSmartPointer()<<endl;
     cout<<smartPointer3->shared_from_this()<<endl;
 
+    cout<<"--------------------------------------"<<endl;
+    std::shared_ptr<SmartPointer> smartPointer4 = smartPointer3->getThisByNewSharedPtr();
     return 0;
 }
