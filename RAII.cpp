@@ -39,17 +39,15 @@ void RAII::mutexTest() {
     cout<<"unique_lock "<<__FUNCTION__<<__LINE__<<endl;
 }
 
-static void __raii_test(RAII* raii) {
-    if (NULL != raii) {
-        raii->mutexTest();
-    }
+static void __raii_test(RAII& raii) {
+   raii.mutexTest();
 }
 
 int main () {
     RAII raii;
 
-    std::thread t1(__raii_test, &raii);
-    std::thread t2(__raii_test, &raii);
+    std::thread t1(__raii_test, std::ref(raii));
+    std::thread t2(__raii_test, std::ref(raii));
 
     t1.join();
     t2.join();
