@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 #include <mutex>
 
 using namespace std;
@@ -33,7 +32,7 @@ void RAII::mutexTest() {
     }
 
     std::unique_lock<std::mutex> locker(m_mutex);
-    cout<<"lock_guard "<<__FUNCTION__<<endl;
+    cout<<"unique_lock "<<__FUNCTION__<<endl;
 }
 
 int main () {
